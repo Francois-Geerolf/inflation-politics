@@ -1,8 +1,8 @@
 # Inflation et pouvoir d’achat : it’s the politics, stupid !
 
-Ce dépôt met à disposition des codes de réplication pour les graphiques de l'[article](https://lecercledeseconomistes.fr/articles/finance/inflation-et-pouvoir-dachat-its-the-politics-stupid/): Inflation et pouvoir d’achat : _it’s the politics, stupid_ ! 
+Ce dépôt met à disposition des codes de réplication pour les graphiques de l'[article](https://hal.science/hal-05505599): Inflation et pouvoir d’achat : _it’s the politics, stupid_ !, coécrit avec Pierre Jacquet. 
 
-## Graphique 1: Inflation des prix à la consommation en France et en Allemagne
+## Graphique 1: Inflation en France et en Allemagne (prix à la consommation)
 
 [Code R](graphique1.R)
 
