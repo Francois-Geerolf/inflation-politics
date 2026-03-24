@@ -2,27 +2,21 @@ library(dplyr)
 library(eurostat)
 library(ggplot2)
 
-source("../../code/R-markdown/init_oecd.R")
-load_data("oecd/PRICES_CPI_var2.RData")
-load_data("oecd/PRICES_CPI.RData")
 
+load("colors.RData")
+load("PRICES_CPI.RData")
+load("PRICES_CPI_var2.RData")
 # Inflation en France vs. Allemagne
 
-PRICES_CPI %>%
-  filter(LOCATION %in% c("FRA", "DEU"),
-         SUBJECT %in% c("CPALTT01"),
-         FREQUENCY == "M",
-         MEASURE == "GY") %>%
-  month_to_date %>%
+graphique1 <- PRICES_CPI %>%
   select(date, LOCATION, obsValue) %>%
   mutate(obsValue = obsValue / 100) %>%
   left_join(PRICES_CPI_var$LOCATION, by = "LOCATION") %>%
-  left_join(colors, by = c("Location"  = "country")) %>%
   mutate(Location2 = ifelse(LOCATION == "DEU", "Allemagne", Location)) %>%
   ggplot(.) + geom_line(aes(x = date, y = obsValue, color = Location2, linetype = Location2)) + 
   scale_color_manual(values = c("#000000", "#ED2939")) +
-  scale_linetype_manual(values = c("dashed", "solid")) +
   add_2flags +
+  scale_linetype_manual(values = c("dashed", "solid")) +
   theme_minimal() + xlab("") + ylab("Inflation, Glissement sur un an (%)") +
   scale_x_date(breaks = seq(1960, 2100, 5) %>% paste0("-01-01") %>% as.Date,
                labels = date_format("%Y")) +
