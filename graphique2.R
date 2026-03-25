@@ -19,7 +19,9 @@ graphique2 <- SLS2010_TC01 %>%
                      labels = percent_format(accuracy = 1),
                      limits = c(-0.05, 0.25)) +
   theme(legend.position = c(0.6, 0.9),
-        legend.title = element_blank())
+        legend.title = element_blank(),
+        plot.caption = element_text(hjust = 0)) +
+  labs(caption = "Source: Insee 2013") +
 
 graphique2
 save(graphique2, file = "graphique2.RData")
