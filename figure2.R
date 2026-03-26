@@ -4,9 +4,13 @@ library(scales)
 
 load("SLS2010_TC01.RData")
 
-graphique2 <- SLS2010_TC01 %>%
+figure2 <- SLS2010_TC01 %>%
   filter(SEXE == "Ensemble") %>%
   select(1, 4, 5, 6) %>%
+  setNames(c("date",
+             "Change in average annual net salary (in %)",
+             "Change in the price index (in %)",
+             "Change in the purchasing power of the average annual net salary (in %)")) %>%
   gather(variable, value, -date) %>%
   mutate(value = value / 100) %>%
   ggplot + geom_line(aes(x = date, y = value, color = variable, linetype = variable)) +
@@ -22,10 +26,11 @@ graphique2 <- SLS2010_TC01 %>%
         legend.title = element_blank(),
         plot.caption = element_text(hjust = 0)) +
   labs(caption = "Source: Insee 2013") +
+  geom_hline(yintercept = 0, linetype = "dashed")
 
-graphique2
-save(graphique2, file = "graphique2.RData")
-ggsave(graphique2, file = "graphique2.pdf", bg = "white", width = 7, height = 4)
-ggsave(graphique2, file = "graphique2.png", bg = "white", width = 7, height = 4)
-ggsave(graphique2, file = "graphique2.svg", bg = "white", width = 7, height = 4)
+figure2
+save(figure2, file = "figure2.RData")
+ggsave(figure2, file = "figure2.pdf", bg = "white", width = 7, height = 4)
+ggsave(figure2, file = "figure2.png", bg = "white", width = 7, height = 4)
+ggsave(figure2, file = "figure2.svg", bg = "white", width = 7, height = 4)
 
